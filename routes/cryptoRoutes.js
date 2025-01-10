@@ -1,11 +1,11 @@
 import express from "express";
 import { cryptoValidator } from "../middleware/cryptoMiddleware.js";
 import { vCrypto } from "../validators/cryptoValidator.js";
-import { getCryptoStats, getCryptoDeviation } from "../controllers/cryptoController.js";
+import cryptoController from "../controllers/cryptoController.js";
 
 const router = express.Router();
 
-router.get('/stats', cryptoValidator(vCrypto), getCryptoStats);
-router.get('/deviation', cryptoValidator(vCrypto), getCryptoDeviation);
+router.get('/stats', cryptoValidator(vCrypto), cryptoController.getCryptoStats);
+router.get('/deviation', cryptoValidator(vCrypto), cryptoController.getCryptoDeviation);
 
-export default router;  
+export default router;
