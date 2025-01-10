@@ -1,4 +1,5 @@
 import Crypto from "../models/cryptoModel";
+import { calculateDeviation } from "../utils/helper";
 
 export const getCryptoStats = async(req, res) => {
     const { coin } = req.query;
@@ -25,9 +26,7 @@ export const getCryptoDeviation = async(req, res) => {
            return res.status(404).json({ error: 'Not enough data' });
         }
         const prices = records.map(record => record.price);
-        const mean = prices.reduce((acc, price) => acc + price, 0) / prices.length;
-        const variance = prices.reduce((acc, price) => acc + Math.pow(price - mean, 2), 0) / prices.length;
-        const deviation = Math.sqrt(variance);
+        const deviation = calculateDeviation(prices);
         res.status(200).json({ deviation: deviation.toFixed(2) });
   } catch (error) {
         res.status(500).json({ error: error.message });
