@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import startCryptoDataJob from './jobs/fetchCryptoData.js';
+import {fetchCryptoData} from './jobs/fetchCryptoData.js';
 import cryptoRoutes from './routes/cryptoRoutes.js';
 
 dotenv.config({ path: './config.env' });
@@ -19,8 +19,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .then(() => {
     console.log('Connected to MongoDB');
-    
-    startCryptoDataJob();
+    fetchCryptoData();
 })
 .catch((error) => {
     console.error('MongoDB connection error:', error);

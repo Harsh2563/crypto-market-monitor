@@ -1,5 +1,5 @@
-import Crypto from "../models/cryptoModel";
-import { calculateDeviation } from "../utils/helper";
+import Crypto from "../models/cryptoModel.js";
+import { calculateDeviation } from "../utils/helper.js";
 
 export const getCryptoStats = async(req, res) => {
     const { coin } = req.query;

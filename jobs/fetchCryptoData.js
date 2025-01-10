@@ -2,7 +2,7 @@ import { CronJob } from 'cron';
 import axios from 'axios';
 import Crypto from '../models/cryptoModel.js';
 
-const fetchCryptoData = async () => {
+export const fetchCryptoData = async () => {
     const coins = ['bitcoin', 'matic-network', 'ethereum'];
     try {
         for (const coin of coins) {
