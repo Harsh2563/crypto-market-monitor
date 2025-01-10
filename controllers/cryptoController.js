@@ -1,5 +1,6 @@
 import Crypto from "../models/cryptoModel.js";
 import { calculateDeviation } from "../utils/helper.js";
+import logger from '../utils/logger.js';
 
 class CryptoController {
     async getCryptoStats(req, res) {
@@ -15,7 +16,8 @@ class CryptoController {
                 '24hChange': latestData.change24h
             });
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            logger.error(`Error in getCryptoStats: ${error.message}`, { coin, stack: error.stack });
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
 
@@ -30,7 +32,8 @@ class CryptoController {
             const deviation = calculateDeviation(prices);
             res.status(200).json({ deviation: deviation.toFixed(2) });
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            logger.error(`Error in getCryptoDeviation: ${error.message}`, { coin, stack: error.stack });
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
 }

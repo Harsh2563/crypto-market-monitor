@@ -1,6 +1,7 @@
 import { CronJob } from 'cron';
 import axios from 'axios';
 import Crypto from '../models/cryptoModel.js';
+import logger from '../utils/logger.js';
 
 export const fetchCryptoData = async () => {
     const coins = ['bitcoin', 'matic-network', 'ethereum'];
@@ -20,7 +21,7 @@ export const fetchCryptoData = async () => {
             console.log(`Data for ${coin} saved.`);
         }
     } catch (error) {
-        // console.error('Error fetching data:', error);
+        logger.error(`Error fetching data: ${error.message}`, { stack: error.stack });
     }
 };
 
