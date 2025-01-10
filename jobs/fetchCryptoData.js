@@ -20,10 +20,10 @@ export const fetchCryptoData = async () => {
             console.log(`Data for ${coin} saved.`);
         }
     } catch (error) {
-        console.error('Error fetching data:', error);
+        // console.error('Error fetching data:', error);
     }
 };
 
-const job = new CronJob('*/5 * * * *', fetchCryptoData, null, true, 'UTC');
+const job = new CronJob('0 */2 * * *', fetchCryptoData, null, true, 'UTC');
 
 job.start();
